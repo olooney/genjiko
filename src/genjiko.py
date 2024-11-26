@@ -32,7 +32,7 @@ __all__ = [
     "generate_html_table",
 ]
 
-# Genjiko character sequence in genjiko.ttf
+# Genjiko character used by genjiko.ttf
 GENJIKO_CHARS = "BCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1"
 
 ENGLISH_TITLES = [
@@ -311,9 +311,7 @@ def draw_genjiko_grid(
 
 
 @validate_call
-def parse_genjiko_file(
-    filename: str
-) -> Iterator[Tuple[str, str, List[Set[int]]]]:
+def parse_genjiko_file() -> Iterator[Tuple[str, str, List[Set[int]]]]:
     """
     Reads the genji-ko text file, which is in this line-delimited format:
     
@@ -371,11 +369,11 @@ def load_genjiko() -> pd.DataFrame:
     layout.
     """
     df = pd.DataFrame(
-        list(parse_genjiko_file("genjiko.txt")),
+        list(parse_genjiko_file()),
         columns=["Kanji", "Romaji", "Partition"]
     )
 
-    df['Icon'] = list("BCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1")
+    df['Icon'] = list(GENJIKO_CHARS)
     df.insert(0, "Chapter", 2 + pd.Series(range(len(df))))
     df.insert(3, "English", ENGLISH_TITLES)
 
