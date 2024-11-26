@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "genjiko"
+version = "0.1.0"
+description = "Utilities and data for working with and drawing Genjiko patterns."
+authors = ["Oran Looney <olooney@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "genjiko.py", from = "src"}]
+include = ["data/genjiko.txt"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pillow = ">=10.3.0"
+pydantic = ">=2.7.1"
+pandas = ">=2.2.2"
+
+[build-system]
+requires = ["poetry>=1.1"]
+build-backend = "poetry.core.masonry.api"
